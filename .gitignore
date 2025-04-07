@@ -172,3 +172,7 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Data files
+data/esm2_t33_650M_UR50D/
+checkpoints/

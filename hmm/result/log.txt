@@ -1,0 +1,301 @@
+# hmmscan :: search sequence(s) against a profile database
+# HMMER 3.1b2 (February 2015); http://hmmer.org/
+# Copyright (C) 2015 Howard Hughes Medical Institute.
+# Freely distributed under the GNU General Public License (GPLv3).
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# query sequence file:             sequence/sequence.fasta
+# target HMM database:             hmm/core_region/core_region.hmm
+# per-dom hits tabular output:     hmm/result/output.txt
+# domain reporting threshold:      E-value <= 0.01
+# number of worker threads:        16
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Query:       pepstatin-pepB(leu)  [L=1100]
+Scores for complete sequence (score includes all domains):
+   --- full sequence ---   --- best 1 domain ---    -#dom-
+    E-value  score  bias    E-value  score  bias    exp  N  Model         Description
+    ------- ------ -----    ------- ------ -----   ---- --  --------      -----------
+    1.2e-62  197.1   1.6      1e-61  194.1   0.3    2.7  1  230807-ForHMM  
+
+
+Domain annotation for each model (and alignments):
+>> 230807-ForHMM  
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !  194.1   0.3     1e-61     1e-61       1     186 []     617     797 ..     617     797 .. 0.97
+
+  Alignments for each domain:
+  == domain 1  score: 194.1 bits;  conditional E-value: 1e-61
+        230807-ForHMM   1 layviyTSGSTGrPKGVmvehralvnllaaaaeafglgaddrvlqfaslsfdasvwelfgallaGatlvlapeeerrdpealaelleeer 90 
+                          layv+yTSGSTGrPKGV+veh+al+nl+a+++++fg+g++dr++++a+++fdasvwe ++al+aGat+ ++++e+ ++p++l  +l e++
+  pepstatin-pepB(leu) 617 LAYVMYTSGSTGRPKGVLVEHHALANLVAWHRAEFGIGPGDRCTLVAAPGFDASVWETWSALTAGATVEVPSAETVLSPSELRSWLIERG 706
+                          7***************************************************************************************** PP
+
+        230807-ForHMM  91 vtvlkltpsllealleaaeeedlsslrtvlvgGEalpaelvrrlrerlpgvrlvnlYGptEttvvataheleaed.eeeaavpiGrpian 179
+                          +t ++l++ lle +l++ +  + s+lr vl+gG++l+ +  + l       rlvn YGptE+tvvat  +++a+  e+++ + iGrp+ +
+  pepstatin-pepB(leu) 707 ITSAFLPTPLLERMLQEPW-PAASALRSVLTGGDRLHGTGRNPL-----PFRLVNNYGPTENTVVATSGTVPADGgERDTLPGIGRPVTG 790
+                          *****************99.9***************99998876.....59*********************98878899999******* PP
+
+        230807-ForHMM 180 trvyvlD 186
+                          t++yvlD
+  pepstatin-pepB(leu) 791 TEAYVLD 797
+                          ******9 PP
+
+
+
+Internal pipeline statistics summary:
+-------------------------------------
+Query sequence(s):                         1  (1100 residues searched)
+Target model(s):                           1  (186 nodes)
+Passed MSV filter:                         1  (1); expected 0.0 (0.02)
+Passed bias filter:                        1  (1); expected 0.0 (0.02)
+Passed Vit filter:                         1  (1); expected 0.0 (0.001)
+Passed Fwd filter:                         1  (1); expected 0.0 (1e-05)
+Initial search space (Z):                  1  [actual number of targets]
+Domain search space  (domZ):               1  [number of targets reported over threshold]
+# CPU time: 0.01u 0.01s 00:00:00.02 Elapsed: 00:00:00.01
+# Mc/sec: 20.46
+//
+Query:       pepstatin-pepD(ala)  [L=1093]
+Scores for complete sequence (score includes all domains):
+   --- full sequence ---   --- best 1 domain ---    -#dom-
+    E-value  score  bias    E-value  score  bias    exp  N  Model         Description
+    ------- ------ -----    ------- ------ -----   ---- --  --------      -----------
+    2.7e-66  209.0   1.2    1.4e-64  203.5   0.1    2.7  2  230807-ForHMM  
+
+
+Domain annotation for each model (and alignments):
+>> 230807-ForHMM  
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !    3.7   0.2    0.0026    0.0026      53     108 ..     547     600 ..     514     609 .. 0.81
+   2 !  203.5   0.1   1.4e-64   1.4e-64       1     186 []     631     819 ..     631     819 .. 0.97
+
+  Alignments for each domain:
+  == domain 1  score: 3.7 bits;  conditional E-value: 0.0026
+        230807-ForHMM  53 asvwelfgallaGatlvlapeeerrdpealaelleeervtvlkltpsllealleaa 108
+                            v+ +++ +++G +   +++e    p++l+++l++ ++ ++ +t  l+  l++a+
+  pepstatin-pepD(ala) 547 GLVTSVLAVMASGSAYLPLSPE--DPPARLVRMLRAAGAAHILTTRELAPVLADAG 600
+                          4678889999999999999987..69********************9999999875 PP
+
+  == domain 2  score: 203.5 bits;  conditional E-value: 1.4e-64
+        230807-ForHMM   1 layviyTSGSTGrPKGVmvehralvnllaaaaeafglgaddrvlqfaslsfdasvwelfgallaGatlvlapeeerrdpealaelleeer 90 
+                          layvi+TSGSTG PK+V v+hr+l+n+++ ++++ gl+++drvl+ ++++fd+s+wel+++l+ Gatlv+a ++ +rdp +l+el+e+er
+  pepstatin-pepD(ala) 631 LAYVIHTSGSTGAPKAVGVPHRGLANRIRGIQDTHGLDTTDRVLHKTPVTFDVSLWELLWPLTVGATLVVAAPGGHRDPTYLVELIERER 720
+                          7***************************************************************************************** PP
+
+        230807-ForHMM  91 vtvlkltpsllealleaaeeedlsslrtvlvgGEalpaelvrrlrerlpgvrlvnlYGptEttvvataheleaed....eeeaavpiGrp 176
+                          vt+++++p ll+a+le+   ++++slr+vl++G +lp+++ +r++erl  +rl+n+YGptE+++ +t  e+++++    + + +v+iGrp
+  pepstatin-pepD(ala) 721 VTTVHFVPPLLAAFLEEPGLHRCASLRRVLCSGQELPRATRDRCLERL-PARLFNAYGPTEASIEVTEEECAPKAtgggAPDPRVSIGRP 809
+                          ****************9999***************************9.59*********************987666667899****** PP
+
+        230807-ForHMM 177 iantrvyvlD 186
+                          ia+++vyvlD
+  pepstatin-pepD(ala) 810 IAGAEVYVLD 819
+                          *********9 PP
+
+
+
+Internal pipeline statistics summary:
+-------------------------------------
+Query sequence(s):                         1  (1093 residues searched)
+Target model(s):                           1  (186 nodes)
+Passed MSV filter:                         1  (1); expected 0.0 (0.02)
+Passed bias filter:                        1  (1); expected 0.0 (0.02)
+Passed Vit filter:                         1  (1); expected 0.0 (0.001)
+Passed Fwd filter:                         1  (1); expected 0.0 (1e-05)
+Initial search space (Z):                  1  [actual number of targets]
+Domain search space  (domZ):               1  [number of targets reported over threshold]
+# CPU time: 0.01u 0.00s 00:00:00.01 Elapsed: 00:00:00.01
+# Mc/sec: 20.33
+//
+Query:       pepstatin-pepG-SA(val)  [L=530]
+Scores for complete sequence (score includes all domains):
+   --- full sequence ---   --- best 1 domain ---    -#dom-
+    E-value  score  bias    E-value  score  bias    exp  N  Model         Description
+    ------- ------ -----    ------- ------ -----   ---- --  --------      -----------
+      6e-61  191.6   0.4    1.2e-59  187.4   0.4    2.3  1  230807-ForHMM  
+
+
+Domain annotation for each model (and alignments):
+>> 230807-ForHMM  
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !  187.4   0.4   1.2e-59   1.2e-59       1     167 [.     146     320 ..     146     356 .. 0.93
+
+  Alignments for each domain:
+  == domain 1  score: 187.4 bits;  conditional E-value: 1.2e-59
+           230807-ForHMM   1 layviyTSGSTGrPKGVmvehralvnllaaaaeafglgaddrvlqfaslsfdasvwelfgallaGatlvlapeeerrdpealaelle 87 
+                             +ayviyTSGS G PKGV v+hr++++llaa+++ f+l+ dd++++f+s++fd+svwe++gal++Ga+lv++p+e++r+pea ++l+ 
+  pepstatin-pepG-SA(val) 146 PAYVIYTSGSSGDPKGVEVSHRNVTALLAACDRVFALRGDDVWTLFHSPCFDFSVWEMWGALAHGAKLVVVPAEVARSPEATLDLVV 232
+                             69************************************************************************************* PP
+
+           230807-ForHMM  88 eervtvlkltpsllealleaaee.......edlsslrtvlvgGEalpaelvrrlrerlp.gvrlvnlYGptEttvvataheleaede 166
+                             +e+vtvl+++ps+++ l ++a +       +  ++lr+v++gGE+++ ++vr++r+ +  +++++n+YG+tEttv+at+ +l++++ 
+  pepstatin-pepG-SA(val) 233 SEGVTVLNQVPSVFRYLSRSAVAraedtadRPATALRYVIFGGEPVDVDAVRAWRALHGtRTEFFNMYGITETTVFATCRRLPESEI 319
+                             ***************99987766677788888899*********************98548*********************99773 PP
+
+           230807-ForHMM 167 e 167
+                             +
+  pepstatin-pepG-SA(val) 320 D 320
+                             3 PP
+
+
+
+Internal pipeline statistics summary:
+-------------------------------------
+Query sequence(s):                         1  (530 residues searched)
+Target model(s):                           1  (186 nodes)
+Passed MSV filter:                         1  (1); expected 0.0 (0.02)
+Passed bias filter:                        1  (1); expected 0.0 (0.02)
+Passed Vit filter:                         1  (1); expected 0.0 (0.001)
+Passed Fwd filter:                         1  (1); expected 0.0 (1e-05)
+Initial search space (Z):                  1  [actual number of targets]
+Domain search space  (domZ):               1  [number of targets reported over threshold]
+# CPU time: 0.01u 0.00s 00:00:00.01 Elapsed: 00:00:00.01
+# Mc/sec: 9.86
+//
+Query:       syrilipamide-nrps(leu-ser-hse-val-bala-ser)  [L=6671]
+Scores for complete sequence (score includes all domains):
+   --- full sequence ---   --- best 1 domain ---    -#dom-
+    E-value  score  bias    E-value  score  bias    exp  N  Model         Description
+    ------- ------ -----    ------- ------ -----   ---- --  --------      -----------
+          0 1209.3   3.8    8.6e-76  240.0   0.0   11.6  7  230807-ForHMM  
+
+
+Domain annotation for each model (and alignments):
+>> 230807-ForHMM  
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !  178.4   0.0     7e-57     7e-57       1     186 []     613     789 ..     613     789 .. 0.94
+   2 !  240.0   0.0   8.6e-76   8.6e-76       1     186 []    1664    1848 ..    1664    1848 .. 0.99
+   3 !  181.8   0.0   6.2e-58   6.2e-58       1     186 []    2746    2929 ..    2746    2929 .. 0.97
+   4 !    2.3   0.0    0.0068    0.0068      25     108 ..    3700    3779 ..    3695    3791 .. 0.84
+   5 !  187.6   0.2     1e-59     1e-59       1     186 []    3815    3999 ..    3815    3999 .. 0.98
+   6 !  174.4   0.0   1.1e-55   1.1e-55       1     186 []    4880    5065 ..    4880    5065 .. 0.99
+   7 !  228.2   0.0   3.6e-72   3.6e-72       1     186 []    5942    6126 ..    5942    6126 .. 0.99
+
+  Alignments for each domain:
+  == domain 1  score: 178.4 bits;  conditional E-value: 7e-57
+                                230807-ForHMM   1 layviyTSGSTGrPKGVmvehralvnllaaaaeafglgaddrvlqfaslsfdasvwelfgallaGa 66 
+                                                  layviyTSGSTG+PKGVm+ehr+lvnl+a+++eafgl++++rv  +a ++fda+vwel++al+ Ga
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 613 LAYVIYTSGSTGQPKGVMIEHRNLVNLVAWHCEAFGLTHRKRVSSVAGVGFDACVWELWPALCVGA 678
+                                                  7***************************************************************** PP
+
+                                230807-ForHMM  67 tlvlapeeer.rdpealaelleeervtvlkltpsllealleaaeeedlsslrtvlvgGEalpaelv 131
+                                                  +l l+p +++  d++al+ ++++++ +v +l++ ++e  ++++   +++sl+t+l+gG++l++   
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 679 SLSLLPGQALgNDVDALLGWWRRQDLDVSFLPTPIAEIAFAQGI--EPASLQTLLIGGDRLRQFPN 742
+                                                  **99987654389************************9999888..9*************976555 PP
+
+                                230807-ForHMM 132 rrlrerlpgvrlvnlYGptEttvvataheleaedeeeaavpiGrpiantrvyvlD 186
+                                                   +     ++v+l+n YGptEttvvat   ++a   +++ ++iGrpiant+vy+lD
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 743 PD-----SRVALINNYGPTETTVVATSGLIDA---TQSVLHIGRPIANTQVYLLD 789
+                                                  54.....4699*******************99...58*****************9 PP
+
+  == domain 2  score: 240.0 bits;  conditional E-value: 8.6e-76
+                                230807-ForHMM    1 layviyTSGSTGrPKGVmvehralvnllaaaaeafglgaddrvlqfaslsfdasvwelfgalla 64  
+                                                   layviyTSGSTG+PKGVm+ehra+vn+l +a+++++l+++drvlq ++++fd+svwe+f++lla
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 1664 LAYVIYTSGSTGQPKGVMIEHRAIVNRLLWAQDQYRLSREDRVLQKTPFGFDVSVWEFFLPLLA 1727
+                                                   7*************************************************************** PP
+
+                                230807-ForHMM   65 GatlvlapeeerrdpealaelleeervtvlkltpsllealleaaeeedlsslrtvlvgGEalpa 128 
+                                                   Ga+lv+a+++ ++dpe+lael+++ +vt+l+++ps+l+++l+++   ++s+lr+v+++GEalp 
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 1728 GAQLVIARPGGHQDPEYLAELIADSGVTILHFVPSMLQSFLNQSGPLACSTLRQVFCSGEALPY 1791
+                                                   ******************************************9999****************** PP
+
+                                230807-ForHMM  129 elvrrlrerlpgvrlvnlYGptEttvvataheleaedeeeaavpiGrpiantrvyvlD 186 
+                                                   +l +++ +r+++v+l+nlYGptE++v++t++++ ++  +++ vpiGrp+antr+y+lD
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 1792 SLQKHFEQRFAHVQLHNLYGPTEAAVDVTYWHCVPD-LHAGIVPIGRPVANTRMYLLD 1848
+                                                   **********************************95.6*******************9 PP
+
+  == domain 3  score: 181.8 bits;  conditional E-value: 6.2e-58
+                                230807-ForHMM    1 layviyTSGSTGrPKGVmvehralvnllaaaaeafglgaddrvlqfaslsfdasvwelfgalla 64  
+                                                   layviyTSGS G+PKGV++e+r+++nl++++ ++++l +dd vl+++s+sfd++  +++g+ll 
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 2746 LAYVIYTSGSSGQPKGVLIEQRGFLNLMHWYLAELKLASDDAVLLVSSYSFDLTQKNILGPLLV 2809
+                                                   7*************************************************************** PP
+
+                                230807-ForHMM   65 GatlvlapeeerrdpealaelleeervtvlkltpsllealleaaeeedlsslrtvlvgGEalpa 128 
+                                                   G+tl+la+e+    pe l+e +++er+t+++l ps++++l++a+++++l+s+r+v++gGE+++ 
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 2810 GGTLHLAREA--FIPEVLLEQIQRERITHINLSPSAFNTLIDANDSRQLDSIRRVVLGGEPIQV 2871
+                                                   ********86..89*****************************999****************** PP
+
+                                230807-ForHMM  129 elvrrlrerlpgvrlvnlYGptEttvvataheleaed..eeeaavpiGrpiantrvyvlD 186 
+                                                   + ++ l e  p+ +++n YGptE++ v+++h+l ++    +++  piGrpiantr+y+lD
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 2872 ARLEMLPE--PRPEFINSYGPTECSDVVAWHRLVDDIdcYRSSVFPIGRPIANTRIYLLD 2929
+                                                   ****9997..89********************998655778999***************9 PP
+
+  == domain 4  score: 2.3 bits;  conditional E-value: 0.0068
+                                230807-ForHMM   25 vnllaaaaeafglgaddrvlqfaslsfdasvwelfgallaGatlvlapeeerrdpealaellee 88  
+                                                   +n+la++   +g+++ddrv+ +a+ s  + v  l+g l aG++ v ++++    p++ ++++ e
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 3700 ANRLAHYLIGLGIQPDDRVAICAQRSLEMVV-GLLGILKAGGAYVPLDHG---YPSERLRYMLE 3759
+                                                   566666777789***************9866.799*************87...68888888899 PP
+
+                                230807-ForHMM   89 ervtvlkltpsllealleaa 108 
+                                                    ++ v+ l+ ++l++ l a 
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 3760 DSAPVAVLVQAALQECLPAV 3779
+                                                   99999999999999988765 PP
+
+  == domain 5  score: 187.6 bits;  conditional E-value: 1e-59
+                                230807-ForHMM    1 layviyTSGSTGrPKGVmvehralvnllaaaaeafglgaddrvlqfaslsfdasvwelfgalla 64  
+                                                   +ayv+yTSGS G PKGV++ehr++++l+ ++  + +++++d v++ a+ +fdas+we+++all+
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 3815 PAYVMYTSGSSGVPKGVLIEHRSVLRLVINN-PYARITTEDCVAHGANTAFDASTWEIWSALLN 3877
+                                                   69***************************99.999***************************** PP
+
+                                230807-ForHMM   65 GatlvlapeeerrdpealaelleeervtvlkltpsllealleaaeeedlsslrtvlvgGEalpa 128 
+                                                   Ga+l ++++++++++++l ++l e +vt l+lt+ l++++++  + +++s+lr++lvgG+ l++
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 3878 GAKLLVVSQATLLNAARLNHVLIEGGVTALWLTAGLFNEYVDVLA-AAFSRLRYLLVGGDVLDP 3940
+                                                   ******************************************999.9***************** PP
+
+                                230807-ForHMM  129 elvrrlrerl.pgvrlvnlYGptEttvvataheleaedeeeaavpiGrpiantrvyvlD 186 
+                                                     v+++++r+ + ++l+n+YGptEtt++a+++e++a +++++++piGrpi ntr+y+lD
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 3941 VSVAKVLSRAhRPRHLINGYGPTETTTFASTYEIHALSDNSRSIPIGRPIGNTRIYLLD 3999
+                                                   *******996258***********************99********************9 PP
+
+  == domain 6  score: 174.4 bits;  conditional E-value: 1.1e-55
+                                230807-ForHMM    1 layviyTSGSTGrPKGVmvehralvnllaaaaeafglgaddrvlqfaslsfdasvwelfgalla 64  
+                                                   layviyTSGS G+PKGV  +h+a+vn+l +++++fg ++ ++ +q +s+sf  sv+e +++ll 
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 4880 LAYVIYTSGSSGKPKGVGGPHQAMVNRLYWMHNTFGGQRLEKHAQKTSISFLDSVTETLMPLLF 4943
+                                                   7*************************************************************** PP
+
+                                230807-ForHMM   65 GatlvlapeeerrdpealaelleeervtvlkltpsllealleaaeeedlsslrtvlvgGEalpa 128 
+                                                   Ga+l+++++ ++rdp +l+++++e++ t l l+pslle+l + ++++  ++ r+++++GE ++ 
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 4944 GAQLHIVSPLASRDPLQLWQAVTEHQLTRLVLVPSLLEELSRIENRQVSPEKRLIVCSGEVFSS 5007
+                                                   ******************************************999899**************** PP
+
+                                230807-ForHMM  129 elvrrlrerlpgvrlvnlYGptEttvvataheleaedeeeaavpiGrpiantrvyvlD 186 
+                                                   +l++r r+ lp+++++n YG +E++ ++t++ ++++ ++++++piGrpiantr+y+lD
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 5008 SLLARTRAWLPSATILNFYGSSEAAGDSTFYLCDSAVQAGHSLPIGRPIANTRIYLLD 5065
+                                                   ***********************************99********************9 PP
+
+  == domain 7  score: 228.2 bits;  conditional E-value: 3.6e-72
+                                230807-ForHMM    1 layviyTSGSTGrPKGVmvehralvnllaaaaeafglgaddrvlqfaslsfdasvwelfgalla 64  
+                                                   layviyTSGSTG+PKGV+ +h ++vn+l +a++++++gaddrvlq ++++fd+svwe+f++lla
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 5942 LAYVIYTSGSTGKPKGVANQHDGVVNRLWWAQSEYRIGADDRVLQKTPFGFDVSVWEIFLPLLA 6005
+                                                   7*************************************************************** PP
+
+                                230807-ForHMM   65 GatlvlapeeerrdpealaelleeervtvlkltpsllealleaaeeedlsslrtvlvgGEalpa 128 
+                                                   Ga+lv+a+++ ++dp++l+e++e++++++l+++ps+l+a++++ ++ ++s+l++vl++GEalp 
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 6006 GAQLVMARPGGHQDPHYLMEVIERRSISMLHFVPSMLQAFVNQTPAGRCSTLKRVLCSGEALPH 6069
+                                                   *********************************************9****************** PP
+
+                                230807-ForHMM  129 elvrrlrerlpgvrlvnlYGptEttvvataheleaedeeeaavpiGrpiantrvyvlD 186 
+                                                   +l+ + ++++p+ +l+nlYGptE+++++ta+++ ae+ + + vpiGrpiant++y+lD
+  syrilipamide-nrps(leu-ser-hse-val-bala-ser) 6070 ALLLQGQAHFPKSELHNLYGPTEAAIDVTAWHYVAEQ-DIGIVPIGRPIANTQIYLLD 6126
+                                                   *********************************9965.9******************9 PP
+
+
+
+Internal pipeline statistics summary:
+-------------------------------------
+Query sequence(s):                         1  (6671 residues searched)
+Target model(s):                           1  (186 nodes)
+Passed MSV filter:                         1  (1); expected 0.0 (0.02)
+Passed bias filter:                        1  (1); expected 0.0 (0.02)
+Passed Vit filter:                         1  (1); expected 0.0 (0.001)
+Passed Fwd filter:                         1  (1); expected 0.0 (1e-05)
+Initial search space (Z):                  1  [actual number of targets]
+Domain search space  (domZ):               1  [number of targets reported over threshold]
+# CPU time: 0.01u 0.03s 00:00:00.04 Elapsed: 00:00:00.03
+# Mc/sec: 41.36
+//
+[ok]

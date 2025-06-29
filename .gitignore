@@ -174,5 +174,7 @@ cython_debug/
 .pypirc
 
 # Data files
-data/esm2_t33_650M_UR50D/
+model/esm2_t33_650M_UR50D/
+model/class_label/
 checkpoints/
+lightning_logs/

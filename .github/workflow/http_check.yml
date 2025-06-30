@@ -1,0 +1,28 @@
+name: Website Availability Check
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: "0 * * * *" # 每小时运行一次
+
+jobs:
+  check-website-status:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 网站状态检测
+        id: check
+        run: |
+          # Using curl to check the status of the website
+          status_code=$(curl -sL --write-out %{http_code} --silent --output /dev/null http://www.nrpstransformer.cn)
+          echo "Status code: $status_code"
+          
+          # If status code is not 200, exit with an error
+          if [ "$status_code" != "200" ]; then
+            echo "Status code is not 200, website may be down."
+            exit 1
+          fi

@@ -1,3 +1,5 @@
+[![Website Status Check](https://github.com/westlake-repl/NRPSTransformer/actions/workflows/http_check.yml/badge.svg)](https://github.com/westlake-repl/NRPSTransformer/actions/workflows/http_check.yml)
+
 # NRPSTransformer
 Transformer Based Nonribosomal Peptide Synthetases Predictor.
 

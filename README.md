@@ -1,4 +1,5 @@
 [![Website Status Check](https://github.com/westlake-repl/NRPSTransformer/actions/workflows/http_check.yml/badge.svg)](https://github.com/westlake-repl/NRPSTransformer/actions/workflows/http_check.yml)
+[![DOI](https://zenodo.org/badge/961756607.svg)](https://doi.org/10.5281/zenodo.15773640)
 
 # NRPSTransformer
 Transformer Based Nonribosomal Peptide Synthetases Predictor.

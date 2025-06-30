@@ -8,18 +8,19 @@ DEFAULT_INPUT_FILE="sequence/sequence.fasta"
 DEFAULT_RESULT_PATH="result/result.csv"
 
 # Ask user to input the sequence file path
-read -p "Please enter the input sequence file path (Default: $DEFAULT_INPUT_FILE): " input_file
+read -p "Please enter the input sequence file path (Default: $DEFAULT_INPUT_FILE):"
 input_file=${REPLY:-$DEFAULT_INPUT_FILE}
 # Check if the specified input file exists
 if [ ! -f "$input_file" ]; then
     echo "Error: The input file '$input_file' does not exist."
     exit 1
 fi
+echo setting input file to "$input_file"
 
 # Ask user to input the result file path
 read -p "Please enter the result file path (Default: $DEFAULT_RESULT_PATH): "
 result_path=${REPLY:-$DEFAULT_RESULT_PATH}
-
+echo setting result path to "$result_path"
 
 # First Run HMM Scan
 if ! ./hmm/scan.sh "$input_file"; then
@@ -34,7 +35,7 @@ if ! python ./hmm/parse_dbtl.py; then
 fi
 
 # Then generate the domains
-if ! python ./hmm/gen_domains.py; then
+if ! python ./hmm/gen_domains.py --fasta_path "$input_file"; then
     echo "Error: Generating domains failed. Please check the parsed dbtl file."
     exit 1
 fi

@@ -6,7 +6,7 @@ from Bio import SeqIO
 def index_fasta(fasta_path):
     id_to_record = {}
     for record in SeqIO.parse(fasta_path, "fasta"):
-        id_to_record[record.id] = record
+        id_to_record[record.id.split()[0]] = record
     return id_to_record
 
 def prepare_inference(dbtl_csv_path, id2record, output_csv_path):
@@ -58,11 +58,20 @@ def prepare_inference(dbtl_csv_path, id2record, output_csv_path):
             "Ends": domain_ends,
             "Domain": domain_seqs,
         }).to_csv(output_csv_path, index=False)
-    
+
+def parse_args():
+    import argparse
+    parser = argparse.ArgumentParser(description="Extract domains from HMM scan results.")
+    parser.add_argument('--dbtl_csv_path', type=str, help='Path to the DBTL CSV file.', default='hmm/result/output.csv')
+    parser.add_argument('--fasta_path', type=str, required=True, help='Path to the FASTA file containing sequences.')
+    parser.add_argument('--output_csv_path', type=str, help='Path to save the output CSV file with domains.', default='hmm/result/domains.csv')
+    return parser.parse_args()
+
 if __name__ == "__main__":
-    dbtl_csv_path = 'hmm/result/output.csv'
-    fasta_path = 'sequence/sequence.fasta'
-    output_csv_path = 'hmm/result/domains.csv'
+    args = parse_args()
+    dbtl_csv_path = args.dbtl_csv_path
+    fasta_path = args.fasta_path
+    output_csv_path = args.output_csv_path
     
     id2record = index_fasta(fasta_path)
     prepare_inference(dbtl_csv_path, id2record, output_csv_path)

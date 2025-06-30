@@ -2,23 +2,21 @@
 # target name        accession   tlen query name           accession   qlen   E-value  score  bias   #  of  c-Evalue  i-Evalue  score  bias  from    to  from    to  from    to  acc description of target
 #------------------- ---------- ----- -------------------- ---------- ----- --------- ------ ----- --- --- --------- --------- ------ ----- ----- ----- ----- ----- ----- ----- ---- ---------------------
 230807-ForHMM        -            186 pepstatin-pepB(leu)  -           1100   1.2e-62  197.1   1.6   1   1     1e-61     1e-61  194.1   0.3     1   186   617   797   617   797 0.97 -
-230807-ForHMM        -            186 pepstatin-pepD(ala)  -           1093   2.7e-66  209.0   1.2   1   2    0.0026    0.0026    3.7   0.2    53   108   547   600   514   609 0.81 -
-230807-ForHMM        -            186 pepstatin-pepD(ala)  -           1093   2.7e-66  209.0   1.2   2   2   1.4e-64   1.4e-64  203.5   0.1     1   186   631   819   631   819 0.97 -
+230807-ForHMM        -            186 pepstatin-pepD(ala)  -           1093   2.7e-66  209.0   1.2   1   1   1.4e-64   1.4e-64  203.5   0.1     1   186   631   819   631   819 0.97 -
 230807-ForHMM        -            186 pepstatin-pepG-SA(val) -            530     6e-61  191.6   0.4   1   1   1.2e-59   1.2e-59  187.4   0.4     1   167   146   320   146   356 0.93 -
-230807-ForHMM        -            186 syrilipamide-nrps(leu-ser-hse-val-bala-ser) -           6671         0 1209.3   3.8   1   7     7e-57     7e-57  178.4   0.0     1   186   613   789   613   789 0.94 -
-230807-ForHMM        -            186 syrilipamide-nrps(leu-ser-hse-val-bala-ser) -           6671         0 1209.3   3.8   2   7   8.6e-76   8.6e-76  240.0   0.0     1   186  1664  1848  1664  1848 0.99 -
-230807-ForHMM        -            186 syrilipamide-nrps(leu-ser-hse-val-bala-ser) -           6671         0 1209.3   3.8   3   7   6.2e-58   6.2e-58  181.8   0.0     1   186  2746  2929  2746  2929 0.97 -
-230807-ForHMM        -            186 syrilipamide-nrps(leu-ser-hse-val-bala-ser) -           6671         0 1209.3   3.8   4   7    0.0068    0.0068    2.3   0.0    25   108  3700  3779  3695  3791 0.84 -
-230807-ForHMM        -            186 syrilipamide-nrps(leu-ser-hse-val-bala-ser) -           6671         0 1209.3   3.8   5   7     1e-59     1e-59  187.6   0.2     1   186  3815  3999  3815  3999 0.98 -
-230807-ForHMM        -            186 syrilipamide-nrps(leu-ser-hse-val-bala-ser) -           6671         0 1209.3   3.8   6   7   1.1e-55   1.1e-55  174.4   0.0     1   186  4880  5065  4880  5065 0.99 -
-230807-ForHMM        -            186 syrilipamide-nrps(leu-ser-hse-val-bala-ser) -           6671         0 1209.3   3.8   7   7   3.6e-72   3.6e-72  228.2   0.0     1   186  5942  6126  5942  6126 0.99 -
+230807-ForHMM        -            186 syrilipamide-nrps(leu-ser-hse-val-bala-ser) -           6671         0 1209.3   3.8   1   6     7e-57     7e-57  178.4   0.0     1   186   613   789   613   789 0.94 -
+230807-ForHMM        -            186 syrilipamide-nrps(leu-ser-hse-val-bala-ser) -           6671         0 1209.3   3.8   2   6   8.6e-76   8.6e-76  240.0   0.0     1   186  1664  1848  1664  1848 0.99 -
+230807-ForHMM        -            186 syrilipamide-nrps(leu-ser-hse-val-bala-ser) -           6671         0 1209.3   3.8   3   6   6.2e-58   6.2e-58  181.8   0.0     1   186  2746  2929  2746  2929 0.97 -
+230807-ForHMM        -            186 syrilipamide-nrps(leu-ser-hse-val-bala-ser) -           6671         0 1209.3   3.8   4   6     1e-59     1e-59  187.6   0.2     1   186  3815  3999  3815  3999 0.98 -
+230807-ForHMM        -            186 syrilipamide-nrps(leu-ser-hse-val-bala-ser) -           6671         0 1209.3   3.8   5   6   1.1e-55   1.1e-55  174.4   0.0     1   186  4880  5065  4880  5065 0.99 -
+230807-ForHMM        -            186 syrilipamide-nrps(leu-ser-hse-val-bala-ser) -           6671         0 1209.3   3.8   6   6   3.6e-72   3.6e-72  228.2   0.0     1   186  5942  6126  5942  6126 0.99 -
 #
 # Program:         hmmscan
 # Version:         3.1b2 (February 2015)
 # Pipeline mode:   SCAN
 # Query file:      sequence/sequence.fasta
 # Target file:     hmm/core_region/core_region.hmm
-# Option settings: /usr/bin/hmmscan --domtblout hmm/result/output.txt --domE 0.01 --cpu 16 hmm/core_region/core_region.hmm sequence/sequence.fasta 
+# Option settings: /usr/bin/hmmscan --domtblout hmm/result/output.txt --domE 1e-30 --cpu 16 hmm/core_region/core_region.hmm sequence/sequence.fasta 
 # Current dir:     /root/project/ESM_NRPS
-# Date:            Sun Jun 29 08:14:21 2025
+# Date:            Mon Jun 30 02:44:55 2025
 # [ok]

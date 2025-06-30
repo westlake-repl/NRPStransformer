@@ -22,18 +22,28 @@ def main(args):
     val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False, num_workers=64)
 
     esm_model = EsmForSequenceClassification.from_pretrained(pretrained_model_name_or_path = MODEL_PATH, num_labels = NUM_LABELS, output_hidden_states=True)
-    model = ProFunCla.load_from_checkpoint(model = esm_model,checkpoint_path=CHECKPOINT_PATH, part_result=args.part_result_path, full_result=args.full_result_path)
+    model = ProFunCla.load_from_checkpoint(model=esm_model, checkpoint_path=CHECKPOINT_PATH, result_path=args.result_path)
     
     trainer = pl.Trainer(accelerator="gpu", devices=[0])
     trainer.test(model=model, dataloaders=val_loader)
+    
+    part_result = pd.read_csv(args.result_path)
+    final_result = pd.DataFrame(columns=["ID", "Domain", "Top-1(score)", "Top-2(score)", "Top-3(score)"])
+    for i in range(len(val_dataset)):
+        id = val_df.iloc[i]["ID"]
+        domain = val_df.iloc[i]["Domain"]
+        top1 = part_result.iloc[i]["Top-1(score)"]
+        top2 = part_result.iloc[i]["Top-2(score)"]
+        top3 = part_result.iloc[i]["Top-3(score)"]
+        final_result.loc[len(final_result)] = [id, domain, top1, top2, top3]
+    final_result.to_csv(args.result_path, index=False)
 
 if __name__ == "__main__":
     import time
     T1 = time.time()
     parser = argparse.ArgumentParser()
     parser.add_argument('--inference_dataset', type=str, default="hmm/result/domains.csv")
-    parser.add_argument('--part_result_path', type=str, default="result/part_result.csv")
-    parser.add_argument('--full_result_path', type=str, default="result/full_result.csv")
+    parser.add_argument('--result_path', type=str, default="result/result.csv")
     args = parser.parse_args()
     main(args)
     T2 = time.time()

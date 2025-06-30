@@ -6,10 +6,16 @@ import pandas as pd
 from torch.optim.lr_scheduler import StepLR
 
 LABEL_PATH = "model/class_label/labelid2label-43.pt"
+CLADE_LABEL_PATH = "model/class_label/labelid2label-17.pt"
 
+def convert_bytes_to_readable(size_in_bytes):
+    for unit in ['B', 'KB', 'MB', 'GB', 'TB']:
+        if size_in_bytes < 1024.0:
+            return f"{size_in_bytes:.2f} {unit}"
+        size_in_bytes /= 1024.0
 
 class ProFunCla(pl.LightningModule):
-    def __init__(self, model, lr, weight_decay, finetune_layer, gama, oversampling, part_result, full_result, **kwargs):
+    def __init__(self, model, lr, weight_decay, finetune_layer, gama, oversampling, result_path, **kwargs):
         super().__init__()
         self.save_hyperparameters(ignore=["model"])
         self.model = model
@@ -22,8 +28,7 @@ class ProFunCla(pl.LightningModule):
         self.gama = gama
         self.oversampling = oversampling
         # Save the results
-        self.part_result_path = part_result
-        self.full_result_path = full_result
+        self.result_path = result_path
 
     def forward(self, input_ids, attention_mask, labels=None):
         output = self.model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
@@ -66,23 +71,30 @@ class ProFunCla(pl.LightningModule):
         
         prob = torch.nn.functional.softmax(logits, dim=1)
         
-        # Save the results
         classes = torch.load(LABEL_PATH)
-        df = pd.DataFrame(prob.cpu().numpy(), columns=classes)
-
-        part = pd.DataFrame(columns=["sequence", "pred", "score"])
-        for i, seq in enumerate(seqs):
-            part.loc[i] = [seq, df.iloc[i].idxmax(), df.iloc[i].max()]
-        part.to_csv(self.part_result_path, index=False)
-
-        whole = pd.DataFrame(columns=["sequence", "pred", "score"]+list(classes))
-        for i, seq in enumerate(seqs):
-            whole.loc[i] = [seq, df.iloc[i].idxmax(), df.iloc[i].max()] + df.iloc[i].tolist()
-        whole.to_csv(self.full_result_path, index=False)
+        clade_classes = torch.load(CLADE_LABEL_PATH)
         
+        choice = None
         
+        try:
+            df = pd.DataFrame(prob.cpu().numpy(), columns=classes)
+            choice = 43
+        except:
+            df = pd.DataFrame(prob.cpu().numpy(), columns=clade_classes)
+            choice = 17
+
+        part = pd.DataFrame(columns=["Top-1(score)", "Top-2(score)", "Top-3(score)","Domain"])
+        for i, seq in enumerate(seqs):
+            # 保留4位有效数字
+            part.loc[i] = [f"{df.iloc[i].idxmax()}({df.iloc[i].max():.4g})",
+                           f"{df.iloc[i].nlargest(2).idxmin()}({df.iloc[i].nlargest(2).min():.4g})",
+                           f"{df.iloc[i].nlargest(3).idxmin()}({df.iloc[i].nlargest(3).min():.4g})", seq]
+
+        part.to_csv(self.result_path, index=False)
+        
+        print(f"Total GPU memory allocated: {convert_bytes_to_readable(torch.cuda.memory_allocated())}")
         return acc
-        
+     
     def configure_optimizers(self):
         optimizer = torch.optim.AdamW(params=self.parameters(), lr=self.lr, weight_decay=self.weight_decay)
         scheduler = StepLR(optimizer, step_size=1, gamma=self.gama)      

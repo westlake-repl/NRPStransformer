@@ -1,4 +1,4 @@
-name: Website Availability Check
+name: Website Status Check
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: 网站状态检测
+      - name: Website status check
         id: check
         run: |
           # Using curl to check the status of the website

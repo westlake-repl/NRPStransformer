@@ -17,24 +17,24 @@ BATCH_SIZE = 8
 def main(args):
     val_df = pd.read_csv(args.inference_dataset)
 
-    tokenizer = EsmTokenizer.from_pretrained(MODEL_PATH)
-    val_dataset = ProSeqDataset(val_df, tokenizer)
-    val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False, num_workers=64)
+    # tokenizer = EsmTokenizer.from_pretrained(MODEL_PATH)
+    # val_dataset = ProSeqDataset(val_df, tokenizer)
+    # val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False, num_workers=64)
 
-    esm_model = EsmForSequenceClassification.from_pretrained(pretrained_model_name_or_path = MODEL_PATH, num_labels = NUM_LABELS, output_hidden_states=True)
-    model = ProFunCla.load_from_checkpoint(model=esm_model, checkpoint_path=CHECKPOINT_PATH, result_path=args.result_path)
+    # esm_model = EsmForSequenceClassification.from_pretrained(pretrained_model_name_or_path = MODEL_PATH, num_labels = NUM_LABELS, output_hidden_states=True)
+    # model = ProFunCla.load_from_checkpoint(model=esm_model, checkpoint_path=CHECKPOINT_PATH, result_path=args.result_path)
     
-    trainer = pl.Trainer(accelerator="gpu", devices=[0])
-    trainer.test(model=model, dataloaders=val_loader)
+    # trainer = pl.Trainer(accelerator="gpu", devices=[0])
+    # trainer.test(model=model, dataloaders=val_loader)
     
     part_result = pd.read_csv(args.result_path)
     final_result = pd.DataFrame(columns=["ID", "Domain", "Top-1(score)", "Top-2(score)", "Top-3(score)"])
-    for i in range(len(val_dataset)):
-        id = val_df.iloc[i]["ID"]
-        domain = val_df.iloc[i]["Domain"]
+    for i in range(len(part_result)):
+        domain = part_result.iloc[i]["Domain"]
         top1 = part_result.iloc[i]["Top-1(score)"]
         top2 = part_result.iloc[i]["Top-2(score)"]
         top3 = part_result.iloc[i]["Top-3(score)"]
+        id = val_df[val_df["Domain"]==domain]["ID"].iloc[0]  # Assuming 'Domain' is unique in the dataset
         final_result.loc[len(final_result)] = [id, domain, top1, top2, top3]
     final_result.to_csv(args.result_path, index=False)
 

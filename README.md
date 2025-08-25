@@ -1,7 +1,7 @@
 [![Website Status Check](https://github.com/westlake-repl/NRPSTransformer/actions/workflows/http_check.yml/badge.svg)](https://github.com/westlake-repl/NRPSTransformer/actions/workflows/http_check.yml)
 [![DOI](https://zenodo.org/badge/961756607.svg)](https://doi.org/10.5281/zenodo.15773640)
 
-# NRPSTransformer
+# NRPStransformer
 **A Transformer-Based Predictor for Nonribosomal Peptide Synthetases (NRPS) Specificity**
 
 Welcome! You can try our web demo here: http://www.nrpstransformer.cn

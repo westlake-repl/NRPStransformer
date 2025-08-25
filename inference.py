@@ -9,7 +9,7 @@ from model.NRPSTransformer import ProFunCla
 
 
 MODEL_PATH = "./model/esm2_t33_650M_UR50D"
-CHECKPOINT_PATH = "checkpoints/epoch=20-val_acc=0.9111-loss=0.0000.ckpt"
+CHECKPOINT_PATH = "checkpoints/all.ckpt"
 NUM_LABELS = 43 
 BATCH_SIZE = 8
 
@@ -17,15 +17,15 @@ BATCH_SIZE = 8
 def main(args):
     val_df = pd.read_csv(args.inference_dataset)
 
-    # tokenizer = EsmTokenizer.from_pretrained(MODEL_PATH)
-    # val_dataset = ProSeqDataset(val_df, tokenizer)
-    # val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False, num_workers=64)
+    tokenizer = EsmTokenizer.from_pretrained(MODEL_PATH)
+    val_dataset = ProSeqDataset(val_df, tokenizer)
+    val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False, num_workers=64)
 
-    # esm_model = EsmForSequenceClassification.from_pretrained(pretrained_model_name_or_path = MODEL_PATH, num_labels = NUM_LABELS, output_hidden_states=True)
-    # model = ProFunCla.load_from_checkpoint(model=esm_model, checkpoint_path=CHECKPOINT_PATH, result_path=args.result_path)
+    esm_model = EsmForSequenceClassification.from_pretrained(pretrained_model_name_or_path = MODEL_PATH, num_labels = NUM_LABELS, output_hidden_states=True)
+    model = ProFunCla.load_from_checkpoint(model=esm_model, checkpoint_path=CHECKPOINT_PATH, result_path=args.result_path)
     
-    # trainer = pl.Trainer(accelerator="gpu", devices=[0])
-    # trainer.test(model=model, dataloaders=val_loader)
+    trainer = pl.Trainer(accelerator="gpu", devices=[0])
+    trainer.test(model=model, dataloaders=val_loader)
     
     part_result = pd.read_csv(args.result_path)
     final_result = pd.DataFrame(columns=["ID", "Domain", "Top-1(score)", "Top-2(score)", "Top-3(score)"])

@@ -1,8 +1,24 @@
+import os
+import warnings
+import logging
+
+# Suppress warnings as early as possible (before importing libraries that emit warnings)
+os.environ["PYTHONWARNINGS"] = "ignore"
+warnings.filterwarnings("ignore")
+
 import argparse
 from torch.utils.data import DataLoader
-import pytorch_lightning as pl
 import pandas as pd
 from transformers import EsmTokenizer, EsmForSequenceClassification
+from transformers.utils import logging as hf_logging
+
+# Reduce third-party library logging verbosity
+hf_logging.set_verbosity_error()
+logging.getLogger("pytorch_lightning").setLevel(logging.ERROR)
+logging.getLogger("lightning").setLevel(logging.ERROR)
+logging.getLogger("lightning_fabric").setLevel(logging.ERROR)
+
+import pytorch_lightning as pl
 
 from data.NRPSDataset import ProSeqDataset
 from model.NRPSTransformer import ProFunCla
@@ -24,7 +40,13 @@ def main(args):
     esm_model = EsmForSequenceClassification.from_pretrained(pretrained_model_name_or_path = MODEL_PATH, num_labels = NUM_LABELS, output_hidden_states=True)
     model = ProFunCla.load_from_checkpoint(model=esm_model, checkpoint_path=CHECKPOINT_PATH, result_path=args.result_path)
     
-    trainer = pl.Trainer(accelerator="gpu", devices=[0])
+    trainer = pl.Trainer(
+        accelerator="gpu",
+        devices=[0],
+        logger=False,
+        enable_progress_bar=False,
+        enable_model_summary=False,
+    )
     trainer.test(model=model, dataloaders=val_loader)
     
     part_result = pd.read_csv(args.result_path)

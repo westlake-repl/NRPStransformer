@@ -67,7 +67,6 @@ class ProFunCla(pl.LightningModule):
         
         labels = torch.cat([x[3] for x in outputs], dim=0)
         acc = logits.argmax(dim=1).eq(labels).sum().item() / labels.size(0)
-        self.log("val_acc", acc)
         
         prob = torch.nn.functional.softmax(logits, dim=1)
         
@@ -85,7 +84,6 @@ class ProFunCla(pl.LightningModule):
 
         part = pd.DataFrame(columns=["Top-1(score)", "Top-2(score)", "Top-3(score)","Domain"])
         for i, seq in enumerate(seqs):
-            # 保留4位有效数字
             part.loc[i] = [f"{df.iloc[i].idxmax()}({df.iloc[i].max():.4g})",
                            f"{df.iloc[i].nlargest(2).idxmin()}({df.iloc[i].nlargest(2).min():.4g})",
                            f"{df.iloc[i].nlargest(3).idxmin()}({df.iloc[i].nlargest(3).min():.4g})", seq]

@@ -1,7 +1,7 @@
 [![Website Status Check](https://github.com/westlake-repl/NRPSTransformer/actions/workflows/http_check.yml/badge.svg)](https://github.com/westlake-repl/NRPSTransformer/actions/workflows/http_check.yml)
 [![DOI](https://zenodo.org/badge/961756607.svg)](https://doi.org/10.5281/zenodo.15773640)
 
-# NRPStransformer
+# NRPSTransformer
 **A Transformer-Based Predictor for Nonribosomal Peptide Synthetases (NRPS) Specificity**
 
 Welcome! You can try our web demo here: http://www.nrpstransformer.cn
@@ -30,12 +30,12 @@ cd NRPSTransformer
 Create and activate a dedicated conda environment using the provided requirement.txt file.
 
 ```bash
-# Create a new conda environment named 'NRPS' with Python 3.8.5
-conda create -n NRPS python=3.8.5 -y
+# Create a new conda environment named 'NRPS' with Python 3.10
+conda create -n NRPS python=3.10 -y
 # Activate the newly created environment
 conda activate NRPS
 # Install the required Python packages
-pip install -r requirement.txt
+pip install -r requirements.txt
 ```
 
 **3. Download the ESM-2 Backbone Model**

@@ -45,3 +45,6 @@ if ! python inference.py --result_path "$result_path"; then
     echo "Error: Final AI prediction failed. Please check the input data and parameters."
     exit 1
 fi
+
+echo "Successfully finished all steps!"
+echo "The result is saved to $result_path"

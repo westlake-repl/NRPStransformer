@@ -9,13 +9,7 @@ Welcome! You can try our web demo here: http://www.nrpstransformer.cn
 ## Overview
 NRPSTransformer is a deep learning model designed to predict the substrate specificity of adenylation (A) domains in Nonribosomal Peptide Synthetases (NRPS). It employs a transformer-based architecture that capitalizes on transfer learning. It generates high-quality protein embeddings from a large, pre-trained language model, which are subsequently fed into a fine-tuned classifier to achieve state-of-the-art prediction accuracy of 93%.
 
-## Prerequisites
-Before you begin, ensure you have the following installed:
-
-- **Conda/Miniconda**: To manage the project environment. You can find installation instructions here.
-- **Git LFS**: For handling large model files. You can install it by following the instructions here.
-
-## Installation [Estimated Time: 10-20 min]
+## Installation
 Please follow these steps carefully to set up the project environment and download the necessary models.
 
 **1. Clone the Repository**

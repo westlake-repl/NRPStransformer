@@ -9,6 +9,12 @@ Welcome! You can try our web demo here: http://www.nrpstransformer.cn
 ## Overview
 NRPSTransformer is a deep learning model designed to predict the substrate specificity of adenylation (A) domains in Nonribosomal Peptide Synthetases (NRPS). It employs a transformer-based architecture that capitalizes on transfer learning. It generates high-quality protein embeddings from a large, pre-trained language model, which are subsequently fed into a fine-tuned classifier to achieve state-of-the-art prediction accuracy of 93%.
 
+## Prerequisites
+Before you begin, ensure you have the following installed:
+
+- **Conda/Miniconda**: To manage the project environment. You can find installation instructions here.
+- **Git LFS**: For handling large model files. You can install it by following the instructions here.
+
 ## Installation
 Please follow these steps carefully to set up the project environment and download the necessary models.
 
@@ -54,7 +60,7 @@ wget -O checkpoints/benchmark.ckpt https://zenodo.org/records/15771488/files/ben
 wget -O checkpoints/clade.ckpt https://zenodo.org/records/15771488/files/clade.ckpt
 
 # Download label mapping files into the 'model/class_label' directory
-wget -O model/class_label/labelid2lable-17.pt https://zenodo.org/records/15771488/files/labelid2lable-17.pt
+wget -O model/class_label/labelid2lable-17.pt https://zenodo.org/records/15771488/files/labelid2label-17.pt
 wget -O model/class_label/labelid2label-43.pt https://zenodo.org/records/15771488/files/labelid2label-43.pt
 ```
 

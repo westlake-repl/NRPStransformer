@@ -60,7 +60,7 @@ wget -O checkpoints/benchmark.ckpt https://zenodo.org/records/15771488/files/ben
 wget -O checkpoints/clade.ckpt https://zenodo.org/records/15771488/files/clade.ckpt
 
 # Download label mapping files into the 'model/class_label' directory
-wget -O model/class_label/labelid2lable-17.pt https://zenodo.org/records/15771488/files/labelid2label-17.pt
+wget -O model/class_label/labelid2label-17.pt https://zenodo.org/records/15771488/files/labelid2label-17.pt
 wget -O model/class_label/labelid2label-43.pt https://zenodo.org/records/15771488/files/labelid2label-43.pt
 ```
 
@@ -76,7 +76,7 @@ NRPSTransformer/
 │   └── ... (Hugging Face model files)
 ├── model/
 │   └── class_label/
-│       ├── labelid2lable-17.pt
+│       ├── labelid2label-17.pt
 │       └── labelid2label-43.pt
 ├── requirement.txt
 ├── run.sh

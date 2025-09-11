@@ -19,6 +19,17 @@ Before you begin, ensure you have the following installed:
 
 - **Conda/Miniconda**: To manage the project environment. You can find installation instructions here.
 - **Git LFS**: For handling large model files. You can install it by following the instructions here.
+- **HMMER**: For domain identification and scanning. Install it using:
+  ```bash
+  # On Ubuntu/Debian
+  sudo apt-get install hmmer
+  
+  # On macOS with Homebrew
+  brew install hmmer
+  
+  # On CentOS/RHEL
+  sudo yum install hmmer
+  ```
 
 ## Installation
 Please follow these steps carefully to set up the project environment and download the necessary models.
@@ -77,13 +88,14 @@ NRPSTransformer/
 │   ├── all.ckpt
 │   ├── benchmark.ckpt
 │   └── clade.ckpt
-├── esm2_t33_650M_UR50D/
-│   └── ... (Hugging Face model files)
+
 ├── model/
-│   └── class_label/
-│       ├── labelid2label-17.pt
-│       └── labelid2label-43.pt
-├── requirement.txt
+│   ├── class_label/
+│   │   ├── labelid2label-17.pt
+│   │   └── labelid2label-43.pt
+│   ├── esm2_t33_650M_UR50D/
+│   └── ... (Hugging Face model files)
+├── requirements.txt
 ├── run.sh
 └── ... (other project files)
 ```
@@ -118,9 +130,223 @@ Please enter the result file path (Default: ./result/result.csv):
 setting result path to ./result/result.csv
 
 # The prediction process will start now...
-# ...
-# ...
-# Prediction finished. Results are saved in ./result/result.csv
+# Running HMM scan...
+# Parsing domain results...
+# Generating domain sequences...
+# Running AI prediction...
+# Time: 45.2sec
+# Successfully finished all steps!
+# The result is saved to ./result/result.csv
+```
+
+**Example Input File Format:**
+Your input FASTA file should contain protein sequences with A-domains, like this:
+
+```fasta
+>pepstatin-pepB(leu)
+MSADTALSSAQQRLWFLWQLRPDGNEYNVPRATRLRGALDSDALRRALDLLVARHDALRATFPTVAGAPVLRIAAEAEVPLPLTDLSALPTAERDAALDEAVTRAALAPFDLAHGPVLRAELIRLAEDDHALVLTFHHIAVDGWSMGIIDRDLAALYAATVAGDDAPSAAPARSYRDCVAAEQRLLAGPRRHEALDHWRTELAGAPLELALPTDRPHPTAPSFAGDSRGFPVPPELAERLDAVAVRHRVTRFIALLSGYAALLSRMTSTPDLVIGVPVSGRTEMEVEGTVGLFVNMMPVRIRCTADTTFGALLHQVRDTVLAGHEYQDLPFQLLVEEVQPDRSTARHPLFQTVVTYEDLPTEGTALPGLDASPLPIPTRTAKYELALHLAGNRQRTEAWVGYQTDVFDDRSAELIGDRYLRLLSAALDDPDTPVAQLPVLGSEEERLLLTDWAGAPERAAPCPARERVDQLVERQARAHPDAVAVRSDEGALSYAALDRAADRIAAGLRAAGAGPGTVVATCLPRGADLVTAQLGVLKSGAAYLSLDPAHPAPRLTALLAEARPLLTLTGPEHRAGLEYGRVETLHSLRDAGDAPDAPDVPDAPDGPPAASAGPDDLAYVMYTSGSTGRPKGVLVEHHALANLVAWHRAEFGIGPGDRCTLVAAPGFDASVWETWSALTAGATVEVPSAETVLSPSELRSWLIERGITSAFLPTPLLERMLQEPWPAASALRSVLTGGDRLHGTGRNPLPFRLVNNYGPTENTVVATSGTVPADGGERDTLPGIGRPVTGTEAYVLDAELRPVPVGVPGELYLGGEGLARGYLGQPALTADRFVPHPFSRTPGARLYRTGDLVRWRTDAGLDFLGRNDHQVKIRGIRVEPGEIENVLRAHPGVHDAVVAAGSPDGTAEPELTAYLVPADASGAPDLAALLDHTTRRLPRHMHPRRYLLLPSVPLTANGKVDRTALAGAARELAPPPAAAHRRARTPLERLISDVWALTLGHDSFGTDDNFFDAGGHSLLLASVRDRLTAELGTPVRIADLYAYPTIATLARQLSGSPGSTAEERPAGRTGGDGVAERRRRGAARLTAMRARTSHGRAERQ
+
+>pepstatin-pepD(ala)
+MTDLTATAPGPTGTADADPSHPASFAQRRLWFLDQLDSGNAAYNLMAALRLRGPLDTEALHWSLNRIVDRHEVLRTVFRADGEGEPRQRVTPHRPLDLPVTDLTGQPREERDERARTLIETETERAFDLATGPLIRTRVVRLDQREHVLAVICHHTVCDGWSMDRLFAELSELYAARTAGRDPALEPLPLQFGEYAARQRGELAGAEARAALAHWRTRLQGAPTLLELPTSFPRPAVQGFDGATHTVPLSPGTWQEVRAAAARHKATPFMLLLSVFALQLSRLSGADDLVIGSPSAGRGRPELAPLIGMFVNTLPLRIDLSGEVTFEELLRRVRRSALDAFPRQDVPLERIVTELGPERARSHDPLFQTMFALQQPLSAPELAGLATDIFPASPRTTFTDLWLEIRPHAAGSDGTGGADCCFRYRTELFDAETVGRLARQYQHLLRTALDAPGTRLSRFSLTGEQETARLLRQGNRSAQAHPWDGPVHEAVDRQARRTPGATAVVFADERLSYAQLAGRTGQLARHLAAHGAAADTPVAVCLPRGTGLVTSVLAVMASGSAYLPLSPEDPPARLVRMLRAAGAAHILTTRELAPVLADAGVPVTAVDTFPWEEGGWPDRPMAPGRVGPDHLAYVIHTSGSTGAPKAVGVPHRGLANRIRGIQDTHGLDTTDRVLHKTPVTFDVSLWELLWPLTVGATLVVAAPGGHRDPTYLVELIERERVTTVHFVPPLLAAFLEEPGLHRCASLRRVLCSGQELPRATRDRCLERLPARLFNAYGPTEASIEVTEEECAPKATGGGAPDPRVSIGRPIAGAEVYVLDAELRPVPAGVPGELYLGGVALARGYLGQPALTADRFVPHPFSRTPGARLYRTGDLVRWRSDAALDFLGRNDHQVKIRGIRVEPGEIENVLRAHPDVRDAVVVATRPDGATGIQLTAYLVPYATDGSRAAPDADALVAAVDDRLRASLPGFMVPSRTVVLPRLPLNASGKVDRAALPAPAAPAPAPATARVAPADHVESTLARIWSQVLDRPGTDVTEDFFALGGDSLKSIQLVHRAREAGLSLRVGDIFHHPTVRDLAAHVRRTAAPAEPREDR
 ```
 
 The program will then run the prediction pipeline, and upon completion, a message will confirm that the results have been saved to your specified output file.
+
+## Workflow Overview
+NRPSTransformer follows a comprehensive pipeline to predict NRPS substrate specificity:
+
+**1. HMM Domain Scanning**
+- Uses HMMER to scan input protein sequences for A-domain regions
+- Identifies conserved motifs and domain boundaries
+- Generates domain-specific sequences for further analysis
+
+**2. Domain Extraction and Processing**
+- Parses HMM scan results to extract A-domain sequences
+- Validates domain quality and filters out low-confidence predictions
+- Prepares sequences in the format required by the transformer model
+
+**3. AI-Based Prediction**
+- Loads the pre-trained ESM-2 transformer model
+- Applies fine-tuned classification layers for substrate specificity
+- Generates confidence scores for multiple substrate predictions
+
+**4. Result Compilation**
+- Combines predictions with original sequence information
+- Provides top-3 substrate predictions with confidence scores
+- Outputs results in CSV format for easy analysis
+
+## Output Format
+The prediction results are saved as a CSV file with the following columns:
+
+| Column | Description |
+|--------|-------------|
+| `ID` | Original sequence identifier from input FASTA |
+| `Domain` | Extracted A-domain sequence |
+| `Top-1(score)` | Highest confidence substrate prediction with score |
+| `Top-2(score)` | Second highest confidence substrate prediction with score |
+| `Top-3(score)` | Third highest confidence substrate prediction with score |
+
+**Example Output:**
+```csv
+ID,Domain,Top-1(score),Top-2(score),Top-3(score)
+pepstatin-pepB(leu),LAYVMYTSGSTGRPKGVLVEHHALANLVAWHRAEFGIGPGDRCTLVAAPGFDASVWETWSALTAGATVEVPSAETVLSPSELRSWLIERGITSAFLPTPLLERMLQEPWPAASALRSVLTGGDRLHGTGRNPLPFRLVNNYGPTENTVVATSGTVPADGGERDTLPGIGRPVTGTEAYVLD,gln(0.9978),ser(0.0011),hty(0.000151)
+pepstatin-pepD(ala),LAYVIHTSGSTGAPKAVGVPHRGLANRIRGIQDTHGLDTTDRVLHKTPVTFDVSLWELLWPLTVGATLVVAAPGGHRDPTYLVELIERERVTTVHFVPPLLAAFLEEPGLHRCASLRRVLCSGQELPRATRDRCLERLPARLFNAYGPTEASIEVTEEECAPKATGGGAPDPRVSIGRPIAGAEVYVLD,asp(0.5783),asn(0.3875),salicylate(0.0146)
+pepstatin-pepG-SA(val),PAYVIYTSGSSGDPKGVEVSHRNVTALLAACDRVFALRGDDVWTLFHSPCFDFSVWEMWGALAHGAKLVVVPAEVARSPEATLDLVVSEGVTVLNQVPSVFRYLSRSAVARAEDTADRPATALRYVIFGGEPVDVDAVRAWRALHGTRTEFFNMYGITETTVFATCRRLPESEIDPRPTTAPDAPAPTGTTADPELNIGRPLDGFEVVLLD,tyr(0.9705),ser(0.007952),cys(0.006917)
+syrilipamide-nrps(leu-ser-hse-val-bala-ser),LAYVIYTSGSTGQPKGVMIEHRNLVNLVAWHCEAFGLTHRKRVSSVAGVGFDACVWELWPALCVGASLSLLPGQALGNDVDALLGWWRRQDLDVSFLPTPIAEIAFAQGIEPASLQTLLIGGDRLRQFPNPDSRVALINNYGPTETTVVATSGLIDATQSVLHIGRPIANTQVYLLD,gln(0.9996),arg(8.013e-05),ser(6.634e-05)
+```
+
+## Advanced Usage
+
+### Direct Python Script Execution
+For users who prefer more control over the prediction process, you can run individual components directly:
+
+**1. HMM Domain Scanning**
+```bash
+# Run HMM scan on your sequences
+./hmm/scan.sh your_sequences.fasta
+
+# Parse the HMM results
+python ./hmm/parse_dbtl.py
+
+# Generate domain sequences
+python ./hmm/gen_domains.py --fasta_path your_sequences.fasta
+```
+
+**2. Direct AI Prediction**
+```bash
+# Run prediction with custom parameters
+python inference.py --inference_dataset hmm/result/domains.csv --result_path your_results.csv
+```
+
+### Custom Model Checkpoints
+You can use different pre-trained model checkpoints for specific use cases:
+
+- `all.ckpt`: General-purpose model trained on all available data (recommended)
+- `benchmark.ckpt`: Model optimized for benchmark datasets
+- `clade.ckpt`: Model specialized for specific bacterial clades
+
+To use a different checkpoint, modify the `CHECKPOINT_PATH` variable in `inference.py`:
+```python
+CHECKPOINT_PATH = "checkpoints/benchmark.ckpt"  # or clade.ckpt
+```
+
+### Batch Processing
+For processing multiple FASTA files, you can create a simple batch script:
+
+```bash
+#!/bin/bash
+# batch_process.sh
+
+for fasta_file in /path/to/your/fasta/files/*.fasta; do
+    echo "Processing $fasta_file"
+    python inference.py --inference_dataset "$fasta_file" --result_path "${fasta_file%.fasta}_results.csv"
+done
+```
+
+## Troubleshooting
+
+### Common Issues and Solutions
+
+**1. HMMER Not Found**
+```
+Error: The input file 'sequence.fasta' does not exist.
+```
+**Solution:** Ensure HMMER is properly installed and accessible in your PATH:
+```bash
+which hmmsearch  # Should return the path to hmmsearch
+hmmsearch -h     # Should show help information
+```
+
+**2. CUDA/GPU Issues**
+```
+RuntimeError: CUDA out of memory
+```
+**Solutions:**
+- Reduce batch size in `inference.py` (change `BATCH_SIZE = 8` to `BATCH_SIZE = 4` or `BATCH_SIZE = 2`)
+- Use CPU-only mode by modifying the trainer configuration:
+```python
+trainer = pl.Trainer(
+    accelerator="cpu",  # Change from "gpu" to "cpu"
+    devices=1,
+    logger=False,
+    enable_progress_bar=False,
+    enable_model_summary=False,
+)
+```
+
+**3. Model Download Issues**
+```
+Error: Failed to download model files
+```
+**Solutions:**
+- Ensure Git LFS is properly installed: `git lfs install`
+- Check internet connection and try downloading manually:
+```bash
+wget -O checkpoints/all.ckpt https://zenodo.org/records/15771488/files/all.ckpt
+```
+
+**4. Memory Issues**
+```
+MemoryError: Unable to allocate array
+```
+**Solutions:**
+- Close other applications to free up RAM
+- Process sequences in smaller batches
+- Use a machine with more available memory
+
+**5. No A-domains Found**
+```
+Warning: No A-domains detected in input sequences
+```
+**Solutions:**
+- Verify your input sequences contain NRPS A-domains
+- Check that sequences are in proper FASTA format
+- Ensure sequences are long enough (>200 amino acids)
+- Try with known NRPS sequences first
+
+**6. Permission Issues**
+```
+Permission denied: cannot execute script
+```
+**Solutions:**
+```bash
+chmod +x run.sh
+chmod +x hmm/scan.sh
+```
+
+### Getting Help
+If you encounter issues not covered here:
+
+1. Check the [GitHub Issues](https://github.com/westlake-repl/NRPSTransformer/issues) page
+2. Verify your environment matches the requirements
+3. Try running with the provided example sequences first
+4. Check the log files in the project directory for detailed error messages
+
+## Citation
+If you use NRPSTransformer in your research, please cite our paper:
+
+```bibtex
+@article{nrpstransformer2024,
+  title={NRPSTransformer: A Transformer-Based Predictor for Nonribosomal Peptide Synthetases Specificity},
+  author={[Authors]},
+  journal={Journal of the American Chemical Society},
+  year={2024},
+  doi={10.1021/jacs.5c08076}
+}
+```
+
+## Contributing
+We welcome contributions to NRPSTransformer! Here's how you can help:
+
+### Reporting Issues
+- Use the [GitHub Issues](https://github.com/westlake-repl/NRPSTransformer/issues) page to report bugs
+- Include detailed information about your environment and the error
+- Provide example sequences that reproduce the issue (if applicable)
+
+### Contributing Code
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature-name`
+3. Make your changes and test thoroughly
+4. Commit your changes: `git commit -m "Add feature"`
+5. Push to the branch: `git push origin feature-name`
+6. Submit a pull request

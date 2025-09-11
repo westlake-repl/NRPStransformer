@@ -56,7 +56,7 @@ def main(args):
         top1 = part_result.iloc[i]["Top-1(score)"]
         top2 = part_result.iloc[i]["Top-2(score)"]
         top3 = part_result.iloc[i]["Top-3(score)"]
-        id = val_df[val_df["Domain"]==domain]["ID"].iloc[0]  # Assuming 'Domain' is unique in the dataset
+        id = val_df.iloc[i]["ID"]
         final_result.loc[len(final_result)] = [id, domain, top1, top2, top3]
     final_result.to_csv(args.result_path, index=False)
 
